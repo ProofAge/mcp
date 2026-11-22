@@ -1,0 +1,12 @@
+{
+  "name": "proofage",
+  "description": "The ProofAge plugin for Claude Code.",
+  "owner": { "name": "ProofAge", "email": "support@proofage.net" },
+  "plugins": [
+    {
+      "name": "proofage",
+      "source": "./",
+      "description": "The ProofAge MCP server and two skills: integrate verification, and look up and support."
+    }
+  ]
+}

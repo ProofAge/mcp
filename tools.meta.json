@@ -1,0 +1,33 @@
+{
+  "create-workspace": { "group": "Workspaces and keys", "summary": "Create a test or live workspace and return its integration guide." },
+  "update-workspace": { "group": "Workspaces and keys", "summary": "Change a workspace's settings; on a live workspace this only returns a preview." },
+  "confirm-live-workspace-change": { "group": "Workspaces and keys", "summary": "Apply a live workspace change that was previewed, after the person agrees." },
+  "list-workspaces": { "group": "Workspaces and keys", "summary": "List the available workspaces." },
+  "get-integration-guide": { "group": "Workspaces and keys", "summary": "Get what is needed to integrate one workspace: keys, URLs, SDK and webhook signing." },
+  "create-secret-key": { "group": "Workspaces and keys", "summary": "Create an inactive secret key in a workspace, for rotating keys." },
+  "activate-secret-key": { "group": "Workspaces and keys", "summary": "Make a secret key the active one; webhooks are signed with it." },
+  "delete-secret-key": { "group": "Workspaces and keys", "summary": "Delete an inactive secret key; requests signed with it stop being accepted." },
+
+  "list-verifications": { "group": "Verifications", "summary": "List verifications with filters, or count them by status." },
+  "get-verification": { "group": "Verifications", "summary": "Get the full detail of one verification, as shown in the admin UI." },
+  "get-verification-stats": { "group": "Verifications", "summary": "Get the dashboard's figures: volumes and how people's attempts ended." },
+  "create-verification": { "group": "Verifications", "summary": "Create a verification session and return the URL the person opens." },
+  "correct-document-fields": { "group": "Verifications", "summary": "Correct document fields the reader got wrong on a verification." },
+  "set-test-verification-outcome": { "group": "Verifications", "summary": "Set the final status of a verification in a test workspace and send its webhook." },
+
+  "list-webhook-deliveries": { "group": "Webhooks", "summary": "List the webhook deliveries sent to your endpoints, newest first." },
+  "get-webhook-delivery-request": { "group": "Webhooks", "summary": "Return the exact signed request of a test delivery, to replay against localhost." },
+  "retry-webhook-delivery": { "group": "Webhooks", "summary": "Queue a failed webhook delivery to be sent again to the same endpoint." },
+  "resend-webhook-delivery": { "group": "Webhooks", "summary": "Send a fresh copy of a webhook delivery to the same endpoint." },
+
+  "list-blocked-faces": { "group": "Blocklist", "summary": "List blocked faces, including who blocked them and why." },
+  "prepare-block-verification-face": { "group": "Blocklist", "summary": "Preview blocking a verification face and get a one-time challenge token." },
+  "confirm-block-verification-face": { "group": "Blocklist", "summary": "Block a verification face with the challenge token, the phrase and a reason." },
+  "prepare-unblock-verification-face": { "group": "Blocklist", "summary": "Preview unblocking a verification face and get a one-time challenge token." },
+  "confirm-unblock-verification-face": { "group": "Blocklist", "summary": "Unblock a verification face with the challenge token, the phrase and a reason." },
+
+  "prepare-purge-personal-data": { "group": "Personal data", "summary": "Preview erasing a verification's personal data and get a challenge token." },
+  "confirm-purge-personal-data": { "group": "Personal data", "summary": "Erase a verification's personal data, irreversibly, for a real erasure request." },
+
+  "read-docs-page": { "group": "Docs", "summary": "Read a page of the ProofAge developer docs, or list every page." }
+}

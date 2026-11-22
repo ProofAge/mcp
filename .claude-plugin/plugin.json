@@ -1,0 +1,21 @@
+{
+  "name": "proofage",
+  "version": "1.1.0",
+  "description": "Integrate KYC and age verification, look up verifications and handle support in ProofAge.",
+  "author": {
+    "name": "ProofAge",
+    "email": "support@proofage.net",
+    "url": "https://proofage.net"
+  },
+  "homepage": "https://docs.proofage.net/integration/mcp/overview",
+  "repository": "https://github.com/ProofAge/mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "kyc",
+    "identity-verification",
+    "age-verification",
+    "oauth"
+  ],
+  "privacyPolicyUrl": "https://proofage.net/privacy"
+}

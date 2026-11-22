@@ -1,0 +1,274 @@
+[
+  {
+    "name": "list-verifications",
+    "title": "List Verifications",
+    "description": "List verifications with optional filters. The date range may not exceed 31 days. For the dashboard's figures and the share approved on the first attempt use get-verification-stats. To break the rows down by raw status use `group_by: \"status\"` — `counts` keyed by every status in ONE call, no per-row data, by the day a verification was created, across every workspace (test included), and it honours the email, external_id and workspace filters; it is not the dashboard's count. `per_page` is capped at 50, so do not try to cover a large `total` in a single unfiltered page — use `group_by` for counts, or page through for rows. To list rows for several statuses at once, pass `statuses` (array) rather than calling once per status. Use `select` to project extra per-item field groups (e.g. [\"age\"], [\"document\",\"smart_signals\"]) instead of calling get-verification per row; pass [\"__catalog__\"] alone to discover available groups. The authoritative outcome reason is `decision.final_reason` (with `reason_label`/`severity`/`scope`); `result_summary` is a non-authoritative pipeline snapshot that can be stale — do not read the decline/resubmit reason from it.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "get-verification",
+    "title": "Get Verification",
+    "description": "Get the full detail of a single verification, including media (videos excluded), exactly as shown in the admin UI. The authoritative outcome reason is `decision.final_reason` (with `reason_label`/`severity`/`scope`); `result_summary` is a non-authoritative pipeline snapshot that can be stale — do not read the decline/resubmit reason from it.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "get-verification-stats",
+    "title": "Get Verification Stats",
+    "description": "The dashboard's figures, exactly: verifications completed per day (against the previous period), and how people's efforts to get through ended - approved on the 1st, 2nd or later attempt, approved after review, declined, abandoned, in progress - with the share approved on the first attempt, per workspace. The resubmission figures count people, merged by external_id, each on the day of their final outcome; the volume figures stay per verification, on the day it was first sent for a decision. Counts live workspaces shown on the dashboard; default period is the last 7 whole days ending yesterday, max 31. For raw status counts by creation date across every workspace (test included), or by email or external_id, use list-verifications with group_by instead.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "create-verification",
+    "title": "Create Verification",
+    "description": "Create a verification session in one of the workspaces (see list-workspaces) and return the URL the person opens to verify, together with the same fields the public API returns on POST /v1/verifications (`id`, `status`, `redirect_url`, `external_id`, `external_metadata`, ...). `redirect_url` is where the person is sent after finishing; without it the workspace default applies. `external_id` and `external_metadata` are echoed back by the API and in webhooks, so put the caller's own references there; `metadata` is internal to the session. A live workspace charges for the session once it is submitted; a test workspace never does. `console_url` opens the session in the admin UI. With `reference_verification_id` the session is a face-only re-check against an approved earlier verification, compared 1:1 and not billed; in a test workspace no real faces are compared and set-test-verification-outcome decides it. Each user may create 10 sessions a minute and 100 a day, links made in the console included; past that the tool answers THROTTLED with `retry_after_seconds`.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "list-workspaces",
+    "title": "List Workspaces",
+    "description": "List the available workspaces.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "list-blocked-faces",
+    "title": "List Blocked Faces",
+    "description": "List blocked faces, including who blocked them and why. `reason_code` is the structured reason a person picked when blocking (`reason_label` is its wording); `reason` beside it is free-text detail, required only when the code is `other`. A null code means the block predates the reason catalog, was propagated by a device match, or came through the public API without one — unrecorded, not ungrounded. The reason codes a row can carry: `presentation_attack` (Spoof attempt (screen / print / mask)) — the selfie or document was photographed from a screen, a print, or a mask; `fraudulent_document` (Fraudulent or tampered document) — the document is forged, edited, or not a real identity document; `scam_or_abuse` (Scam or abusive behaviour on the platform) — the identity may be genuine — the person is blocked for what they did on the vendor's platform; `underage` (Underage user) — the person is below the age the workspace verifies for; `other` (Other) — anything the other codes do not cover, explained in the comment.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "prepare-block-verification-face",
+    "title": "Prepare Block Verification Face",
+    "description": "Preview blocking a verification face and return a short-lived one-time challenge token to be passed to confirm-block-verification-face.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "confirm-block-verification-face",
+    "title": "Confirm Block Verification Face",
+    "description": "Block a verification face using a short-lived challenge token. Requires the exact confirmation phrase BLOCK_FACE and a reason. The action, actor and reason are logged.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "prepare-unblock-verification-face",
+    "title": "Prepare Unblock Verification Face",
+    "description": "Preview unblocking a verification face and return a short-lived one-time challenge token to be passed to confirm-unblock-verification-face.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "confirm-unblock-verification-face",
+    "title": "Confirm Unblock Verification Face",
+    "description": "Unblock a verification face using a short-lived challenge token. Requires the exact confirmation phrase UNBLOCK_FACE and a reason. The action, actor and reason are logged.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "list-webhook-deliveries",
+    "title": "List Webhook Deliveries",
+    "description": "List the webhook deliveries sent to this organization's endpoints, newest first, as on the admin Webhooks page: endpoint URL, delivery `status` (pending, success, failed, completed, skipped), attempt count, the endpoint's HTTP code and response body (cut at 2000 characters), the last attempt's record without request headers, and the verification it was about. Filter by verification, workspace, status, response code group or creation date. `can_retry` and `can_resend` say whether retry-webhook-delivery and resend-webhook-delivery will accept it: only the latest delivery of a verification to that endpoint can be sent again. Pass `include_payload: true` for the exact body that was sent, in `payload` and in the last attempt's `request_body`.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "read-docs-page",
+    "title": "Read Docs Page",
+    "description": "Read a page of the ProofAge developer docs as markdown: the quick start, server SDKs, Browser SDK, webhooks, testing, API authentication and the rest. page takes the page path (integration/webhooks.md), its proofage://docs/... resource URI or its https docs URL; openapi.json returns the OpenAPI document (about 160 KB; if your client cuts long tool results, fetch its url from the page list instead). Without page, lists every page with its path and title.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "correct-document-fields",
+    "title": "Correct Document Fields",
+    "description": "Correct document fields the reader got wrong on an approved, declined or in-review verification. `fields` maps field names to corrected values: dates YYYY-MM-DD, countries ISO alpha-2, gender F|M|X, type passport|id|driver_license|residence_permit|other, issuing_subdivision a bare code such as FL; null removes a correction and brings the recognised value back. Every workspace takes type, issuing_country and issuing_subdivision; age workspaces add first_name, last_name, date_of_birth and document_number, KYC workspaces all eleven fields. A corrected issuing_country drops the recognised subdivision unless issuing_subdivision is corrected too. The status does not change and no check is re-run; the recognised values are kept. A data.updated webhook with the corrected document and changed_fields is sent to the workspace's webhook_url, unless the workspace has webhook_include_document_data off. Read the result back with get-verification or list-verifications (select: document).",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "create-workspace",
+    "title": "Create Workspace",
+    "description": "Create a workspace in the tenant and return its integration guide (public key, API URL, SDK parameters, webhook signing, checklist). mode (test|live) and flow_type (kyc|age) are fixed for the workspace's lifetime: going live means creating a second workspace with mode live and swapping its keys into the integration. An age workspace needs age_mode (estimation|document_verification) and age_threshold (exactly 18 for estimation, 16-25 for document_verification). A test workspace returns its secret keys; a live workspace never does, and returns secret_console_url where a person copies the active key. privacy_mode (protected|private, private only for facial age estimation) can be refined with private_discard_media and private_skip_device_signals (booleans, both true by default: delete media and document data right after the decision, collect no device fingerprint; false keeps that part as under protected). A workspace follows the account's evidence period unless evidence_retention_days (30, 60, 90, 180, 365, 730, 1825 or 0 for unlimited) overrides it; not editable under private with private_discard_media true. liveness_check (head_turn|passive|aws): the selfie check; passive skips the head turn and is easier to get past, see the parameter. Each user may create 5 workspaces a minute and 20 a day.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "update-workspace",
+    "title": "Update Workspace",
+    "description": "Change any subset of a workspace's settings: name, redirect_url, webhook_url, webhook_include_document_data (false: webhooks to webhook_url carry only the verdict, no document data, and no data.updated), external_profile_url_template, allow_expired_documents, allow_duplicate_accounts, privacy_mode (protected|private, private only for facial age estimation), private_discard_media and private_skip_device_signals (booleans, only under private, both true by default: delete media and document data right after the decision, collect no device fingerprint; false keeps that part as under protected), evidence_retention_days (30, 60, 90, 180, 365, 730, 1825 or 0 for unlimited; null follows the account default; not editable under private with private_discard_media true; a shorter period deletes older photos, documents and document data that night, irreversibly), liveness_check (head_turn|passive|aws): the selfie check; passive skips the head turn and is easier to get past, see the parameter. status (active|suspended), and on an age workspace age_mode and age_threshold. mode and flow_type cannot change. A suspended workspace answers every /v1 request with 403 and its open sessions fail; a live workspace can be suspended here only after 24 hours without a new verification (LIVE_WORKSPACE_IN_USE otherwise; a person can do it in the console). Pass null to clear a URL. On a test workspace the change is applied and the integration guide returned. On a live workspace NOTHING is applied: the answer has requires_confirmation true, the diff, and a challenge_token for confirm-live-workspace-change. Show the diff to the person before confirming.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "confirm-live-workspace-change",
+    "title": "Confirm Live Workspace Change",
+    "description": "Apply a change to a live workspace that update-workspace, activate-secret-key or delete-secret-key previewed. Pass the workspace_id and challenge_token from the preview, the exact confirmation phrase APPLY_LIVE_CHANGE, and a reason; the preview's own values are applied, nothing else. The token is single-use and expires after 10 minutes. STALE_PREVIEW means the workspace changed since the preview: preview again. LIVE_WORKSPACE_IN_USE means a suspension met new traffic since the preview. Either way the token is spent. The action, actor and reason are logged.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "get-integration-guide",
+    "title": "Get Integration Guide",
+    "description": "Everything needed to integrate one workspace: its settings, the API base URL and public key (pk_...), its secret keys, the server SDK to install for the backend language, Browser SDK loader parameters, how webhooks are signed, a checklist of where the integration stands, and next steps. On a test workspace the secret keys carry their secret; on a live workspace they never do, and secret_console_url is where a person copies the active key. Read the docs it links with read-docs-page.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "create-secret-key",
+    "title": "Create Secret Key",
+    "description": "Create an inactive secret key in a workspace, for rotating keys. Every workspace already has an active \"Default Key\", so this is not needed for first setup. At most 5 keys per workspace, the default one included. Any non-deleted key can sign API requests; only the active key signs webhooks (see activate-secret-key). On a test workspace the secret is returned; on a live workspace it never is, and secret_console_url is where a person copies it.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "activate-secret-key",
+    "title": "Activate Secret Key",
+    "description": "Make a secret key the active one: webhooks are signed with the active key, so the customer's webhook handler must verify with it before this runs. On a test workspace it is applied. On a live workspace NOTHING is applied: the answer is a preview with a challenge_token for confirm-live-workspace-change.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "delete-secret-key",
+    "title": "Delete Secret Key",
+    "description": "Delete an inactive secret key: API requests signed with it stop being accepted. The active key cannot be deleted; activate another one first. On a test workspace it is applied. On a live workspace NOTHING is applied: the answer is a preview with a challenge_token for confirm-live-workspace-change.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "retry-webhook-delivery",
+    "title": "Retry Webhook Delivery",
+    "description": "Queue a failed webhook delivery, if it is still the latest of its verification to that endpoint, to be sent again to the same endpoint, as the Retry button on the admin Webhooks page does. Only a delivery in status `failed` with fewer than 4 attempts can be retried (`can_retry` in list-webhook-deliveries); for anything else use resend-webhook-delivery, which sends a fresh copy. A data.updated delivery to the webhook URL is refused (DOCUMENT_DATA_OFF) once the workspace turned webhook_include_document_data off. Retries and resends together are limited to 10 a minute and 100 a day per user.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "resend-webhook-delivery",
+    "title": "Resend Webhook Delivery",
+    "description": "Send a fresh copy of a webhook delivery to the same endpoint, as the Resend button on the admin Webhooks page does: a new delivery is created with the same payload (fingerprint signals refreshed) and queued, and the original is left untouched. Only the latest delivery of a verification to that endpoint can be resent; an older one is refused (SUPERSEDED), since it may carry a status the verification no longer has. A data.updated delivery to the webhook URL is refused (DOCUMENT_DATA_OFF) once the workspace turned webhook_include_document_data off. Use it to replay an event while testing an endpoint. Returns the new delivery; follow it with list-webhook-deliveries. Retries and resends together are limited to 10 a minute and 100 a day per user.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "get-webhook-delivery-request",
+    "title": "Get Webhook Delivery Request",
+    "description": "For a webhook delivery in a TEST workspace, return the exact HTTP request ProofAge sends, signed now with the workspace's active secret key: method, headers (including X-HMAC-Signature and X-Timestamp) and the raw body. Use it to replay the webhook against a handler on localhost, e.g. with curl --data-raw. Send the body byte for byte: a re-serialised body fails signature verification, as it should. A handler following the ProofAge guide rejects timestamps older than 300 seconds, so replay promptly or fetch again. Delivery ids come from list-webhook-deliveries.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "set-test-verification-outcome",
+    "title": "Set Test Verification Outcome",
+    "description": "Set the final status of a verification in a TEST workspace: approved, declined or resubmission_requested. A test submission skips analysis and waits in review; this finishes it and sends the outcome webhook, so the integration's webhook handler can be exercised. Only works from submitted or review, i.e. after a person finished the widget (INVALID_STATUS otherwise). test_reason is recorded for resubmission_requested. The webhook is queued: find its delivery with list-webhook-deliveries shortly after, then replay it locally with get-webhook-delivery-request. Each user may set 30 outcomes a minute.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "developer"
+    ]
+  },
+  {
+    "name": "prepare-purge-personal-data",
+    "title": "Prepare Purge Personal Data",
+    "description": "Irreversible once confirmed: preview erasing a verification's personal data (media, document fields, raw results, device data) and return a short-lived one-time challenge token for confirm-purge-personal-data. The decision, dates and audit trail stay. Nothing is erased by this call.",
+    "read_only": true,
+    "roles": [
+      "administrator",
+      "support_specialist"
+    ]
+  },
+  {
+    "name": "confirm-purge-personal-data",
+    "title": "Confirm Purge Personal Data",
+    "description": "IRREVERSIBLE. Erase a verification's personal data using the challenge token from prepare-purge-personal-data, the exact confirmation phrase PURGE_PERSONAL_DATA, a reason code and a written reason. Media, document fields and raw results are removed; the decision, dates and audit trail stay. Only for a real request to erase - never to tidy up.",
+    "read_only": false,
+    "roles": [
+      "administrator",
+      "support_specialist"
+    ]
+  }
+]

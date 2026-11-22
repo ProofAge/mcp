@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "proofage": {
+      "type": "http",
+      "url": "https://app.proofage.net/mcp/admin"
+    }
+  }
+}

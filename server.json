@@ -1,0 +1,34 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "net.proofage/proofage",
+  "title": "ProofAge",
+  "description": "Integrate KYC and age verification, look up verifications and handle support in ProofAge.",
+  "version": "1.1.0",
+  "websiteUrl": "https://proofage.net/mcp-server",
+  "icons": [
+    {
+      "src": "https://proofage.net/assets/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    },
+    {
+      "src": "https://proofage.net/assets/favicon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://app.proofage.net/mcp/admin"
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/ProofAge/mcp",
+    "source": "github"
+  }
+}

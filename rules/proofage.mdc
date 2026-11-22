@@ -1,0 +1,16 @@
+---
+description: Use the ProofAge MCP server for identity (KYC) and age verification work in this project.
+alwaysApply: false
+---
+
+Use the ProofAge MCP server when the task involves ProofAge: integrating identity (KYC) or age
+verification, looking up a verification, webhook deliveries, the face blocklist, or erasing a
+person's data.
+
+- Sign-in is OAuth in the browser. Never ask the user for a ProofAge password or API key to connect.
+- Write integrations with the official server SDK for the backend's language; do not write request
+  signing by hand when an SDK exists.
+- Keep keys in environment variables; never commit them. A live secret key never passes through
+  the server: the user copies it from the console.
+- Before blocking or unblocking a face, erasing personal data or confirming a change to a live
+  workspace, show the preview to the user and wait for their agreement.
