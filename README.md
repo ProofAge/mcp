@@ -40,7 +40,7 @@ The plugin is the server address, two skills and, in Cursor, one rule. Nothing i
 | Directory | Listing | Updated |
 | --- | --- | --- |
 | Official MCP Registry | [`net.proofage/proofage`](https://registry.modelcontextprotocol.io/v0/servers?search=net.proofage/proofage) | By hand, from `server.json` |
-| Cursor directory | [ProofAge](https://cursor.directory/plugins/proofage) | By hand: Edit, then Re-scan |
+| Cursor directory | [ProofAge](https://cursor.directory/plugins/proofage) | By hand, in the listing's edit form |
 | mcp.so | [ProofAge: KYC and age verification](https://mcp.so/servers/proofage-kyc-and-age-verification) | Reads this README on its own schedule |
 | Glama | [ProofAge](https://glama.ai/mcp/connectors/net.proofage/proofage) | Imported from the registry |
 | Claude Code | `/plugin marketplace add ProofAge/mcp` | From this repository |
