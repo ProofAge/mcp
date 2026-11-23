@@ -1,6 +1,6 @@
 ---
 name: integrate-proofage
-description: Integrate ProofAge identity (KYC) or age verification into the current project through the ProofAge MCP server. Use when the user asks to add age verification, an 18+ check, KYC or ProofAge to an app, or to test or debug a ProofAge integration and its webhooks.
+description: Integrate ProofAge identity (KYC) or age verification into the current project through the ProofAge MCP server. Use when the user asks to add age verification, an 18+ check, identity verification, an ID document check, KYC or ProofAge to an app, or to test or debug a ProofAge integration and its webhooks.
 ---
 
 # Integrate ProofAge

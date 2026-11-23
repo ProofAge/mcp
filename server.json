@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "net.proofage/proofage",
   "title": "ProofAge",
-  "description": "Integrate KYC and age verification, look up verifications and handle support in ProofAge.",
-  "version": "1.1.0",
+  "description": "Add age and identity (KYC) verification to your app, look up verifications and replay webhooks.",
+  "version": "1.1.1",
   "websiteUrl": "https://proofage.net/mcp-server",
   "icons": [
     {

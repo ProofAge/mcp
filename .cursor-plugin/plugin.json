@@ -1,14 +1,14 @@
 {
   "name": "proofage",
   "displayName": "ProofAge",
-  "version": "1.1.0",
-  "description": "Integrate KYC and age verification, look up verifications and handle support in ProofAge.",
-  "author": { "name": "ProofAge", "email": "support@proofage.net" },
+  "version": "1.1.1",
+  "description": "Add age verification and identity verification (KYC) to your app with ProofAge, then look up verifications, replay webhooks and handle erasure requests.",
+  "author": {"name": "ProofAge", "email": "support@proofage.net"},
   "homepage": "https://docs.proofage.net/integration/mcp/overview",
   "repository": "https://github.com/ProofAge/mcp",
   "license": "MIT",
   "logo": "assets/icon-512.png",
-  "keywords": ["mcp", "kyc", "identity-verification", "age-verification", "oauth"],
+  "keywords": ["kyc", "age-verification", "identity-verification", "id-verification", "compliance", "webhooks", "mcp"],
   "mcpServers": ".mcp.json",
   "rules": "rules/",
   "skills": "skills/"

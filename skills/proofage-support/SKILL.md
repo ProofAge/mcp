@@ -1,6 +1,6 @@
 ---
 name: proofage-support
-description: Look up ProofAge verifications and handle support requests through the ProofAge MCP server. Use when the user asks why a verification was declined, for approval figures, to send a verification link, to check or replay webhook deliveries, to block or unblock a face, or to erase a person's data.
+description: Look up ProofAge verifications and handle support requests through the ProofAge MCP server. Use when the user asks why a verification was declined, for approval figures, to send a verification link, to check or replay webhook deliveries, to correct a misread document field, to block or unblock a face, or to erase a person's data.
 ---
 
 # ProofAge support
@@ -15,7 +15,8 @@ Use the `proofage` MCP server. If it is not connected, tell the user to sign in:
 | Approval rate or other dashboard figures | `get-verification-stats`. It gives the same numbers as the console's dashboard, for live workspaces. |
 | Did someone verify more than once? Find verifications for a user | `list-verifications`, filtered by `external_id`. |
 | Send a verification link | `create-verification` in the right workspace (see `list-workspaces`). It returns the URL to send. |
-| A webhook did not arrive or the handler fails | `list-webhook-deliveries`, then `get-webhook-delivery-request` to replay the exact signed request against a local handler. |
+| A webhook did not arrive or the handler fails | `list-webhook-deliveries`. To send a failed delivery again, `retry-webhook-delivery`. In a test workspace, `get-webhook-delivery-request` returns the exact signed request to replay against a local handler. The last two need the Administrator or Developer role. |
+| A document field was read wrongly | `correct-document-fields`. The status stays the same and no check is re-run. Administrator or Support specialist role. |
 
 ## Blocking, unblocking and erasing
 

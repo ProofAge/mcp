@@ -31,9 +31,21 @@ Claude Code:
 
 Then run `/mcp` to sign in. If you added the server by hand before, remove that entry first, or it will be listed twice.
 
-Cursor: the plugin will be linked here once it is listed in the Cursor directory.
+Cursor: open [ProofAge in the Cursor directory](https://cursor.directory/plugins/proofage) and choose **Add to Cursor**, then sign in from the MCP settings.
 
-The plugin is the server address and two skills. Nothing in it runs on your machine.
+The plugin is the server address, two skills and, in Cursor, one rule. Nothing in it runs on your machine.
+
+## Where to find it
+
+| Directory | Listing | Updated |
+| --- | --- | --- |
+| Official MCP Registry | [`net.proofage/proofage`](https://registry.modelcontextprotocol.io/v0/servers?search=net.proofage/proofage) | By hand, from `server.json` |
+| Cursor directory | [ProofAge](https://cursor.directory/plugins/proofage) | By hand: Edit, then Re-scan |
+| mcp.so | [ProofAge: KYC and age verification](https://mcp.so/servers/proofage-kyc-and-age-verification) | Reads this README on its own schedule |
+| Glama | [ProofAge](https://glama.ai/mcp/connectors/net.proofage/proofage) | Imported from the registry |
+| Claude Code | `/plugin marketplace add ProofAge/mcp` | From this repository |
+
+How to release a change: [RELEASING.md](RELEASING.md).
 
 ## What it can do
 

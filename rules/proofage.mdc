@@ -1,5 +1,5 @@
 ---
-description: Use the ProofAge MCP server for identity (KYC) and age verification work in this project.
+description: Apply when the task mentions ProofAge or adds age or identity (KYC) verification; use the ProofAge MCP server and the official SDKs, and confirm destructive actions with the user.
 alwaysApply: false
 ---
 
