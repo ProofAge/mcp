@@ -141,7 +141,7 @@ Every action is recorded under your name, as it is in the console.
 - **Live workspaces are protected.** Changing a live workspace or its keys only returns a preview; nothing is applied until you confirm. Live secret keys are never returned: you copy them from the console.
 - **Creation is rate-limited per user**: verifications, workspaces, test outcomes and erasures.
 
-To remove access, disconnect the server in your MCP client.
+To remove access, disconnect the server in your MCP client, or in the ProofAge console under [Connected apps](https://app.proofage.net/profile?tab=apps).
 
 ## Cost
 
